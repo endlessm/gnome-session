@@ -208,6 +208,7 @@ require_dbus_session (int      argc,
         return TRUE;
 }
 
+#if 0
 static gboolean
 check_gl (GError **error)
 {
@@ -226,6 +227,7 @@ check_gl (GError **error)
 
         return g_spawn_check_exit_status (status, error);
 }
+#endif
 
 int
 main (int argc, char **argv)
@@ -296,6 +298,7 @@ main (int argc, char **argv)
         if (disable_acceleration_check) {
                 g_debug ("hardware acceleration check is disabled");
         } else {
+#if 0
                 /* Check GL, if it doesn't work out then force software fallback */
                 if (!check_gl (&error)) {
                         gl_failed = TRUE;
@@ -314,6 +317,7 @@ main (int argc, char **argv)
                                 }
                         }
                 }
+#endif
         }
 
         if (show_version) {
