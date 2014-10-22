@@ -270,7 +270,7 @@ require_dbus_session (int      argc,
         /* Should not be reached */
         return TRUE;
 }
-
+#if 0
 static gboolean
 check_gl (GError **error)
 {
@@ -289,6 +289,7 @@ check_gl (GError **error)
 
         return g_spawn_check_exit_status (status, error);
 }
+#endif
 
 int
 main (int argc, char **argv)
@@ -317,6 +318,7 @@ main (int argc, char **argv)
                 gsm_util_init_error (TRUE, "%s", error->message);
         }
 
+#if 0
         /* Check GL, if it doesn't work out then force software fallback */
         if (!check_gl (&error)) {
                 gl_failed = TRUE;
@@ -335,6 +337,7 @@ main (int argc, char **argv)
                         }
                 }
         }
+#endif
 
         bindtextdomain (GETTEXT_PACKAGE, LOCALE_DIR);
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
