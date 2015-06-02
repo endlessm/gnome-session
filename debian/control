@@ -12,7 +12,6 @@ Build-Depends: cdbs (>= 0.4.41),
                intltool (>= 0.40.6),
                libglib2.0-dev (>= 2.35.0),
                libgtk-3-dev (>= 2.90.7),
-               libdbus-glib-1-dev (>= 0.76),
                libjson-glib-dev (>= 0.10),
                libgnome-desktop-3-dev (>= 3.9.91),
                libsm-dev,
@@ -28,9 +27,7 @@ Build-Depends: cdbs (>= 0.4.41),
                xmlto,
                xsltproc,
                xtrans-dev,
-               libsystemd-login-dev (>= 183),
-               libsystemd-daemon-dev,
-               libsystemd-journal-dev
+               libsystemd-dev (>= 209) [linux-any]
 Vcs-Svn: svn://anonscm.debian.org/pkg-gnome/desktop/unstable/gnome-session
 Vcs-Browser: http://anonscm.debian.org/viewvc/pkg-gnome/desktop/unstable/gnome-session
 
@@ -42,7 +39,6 @@ Depends: ${misc:Depends},
          gnome-session-bin (>= ${binary:Version}),
          gnome-session-bin (<< ${gnome:NextVersion}),
          gnome-session-common (= ${binary:Version})
-Recommends: systemd
 Suggests: gnome-user-guide,
           desktop-base,
           gnome-keyring
@@ -70,7 +66,8 @@ Depends: ${shlibs:Depends},
          ${misc:Depends},
          dbus-x11,
          gsettings-desktop-schemas,
-         upower (>= 0.9.0)
+         upower (>= 0.9.0
+Recommends: libpam-systemd [linux-any]
 Conflicts: gnome-session (<< 2.26.1-5)
 Breaks: gdm3 (<< 3.8)
 Description: GNOME Session Manager - Minimal runtime
