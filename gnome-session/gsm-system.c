@@ -202,6 +202,7 @@ gsm_get_system (void)
                         g_debug ("Using systemd for session tracking");
                 }
         }
+
         if (system == NULL) {
                 system = GSM_SYSTEM (gsm_consolekit_new ());
                 if (system != NULL) {
