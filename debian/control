@@ -29,9 +29,7 @@ Build-Depends: cdbs (>= 0.4.41),
                xmlto,
                xsltproc,
                xtrans-dev,
-               libsystemd-login-dev (>= 183),
-               libsystemd-daemon-dev,
-               libsystemd-journal-dev
+               libsystemd-dev (>= 209)
 Vcs-Svn: svn://anonscm.debian.org/pkg-gnome/desktop/unstable/gnome-session
 Vcs-Browser: http://anonscm.debian.org/viewvc/pkg-gnome/desktop/unstable/gnome-session
 
