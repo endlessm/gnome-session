@@ -339,6 +339,11 @@ static gboolean extensions = FALSE;
 
 int main (int argc, char *argv[])
 {
+        setlocale (LC_ALL, "");
+        bindtextdomain (GETTEXT_PACKAGE, LOCALE_DIR);
+        bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+        textdomain (GETTEXT_PACKAGE);
+
         GOptionEntry entries[] = {
                  { "debug", 0, 0, G_OPTION_ARG_NONE, &debug_mode, N_("Enable debugging code"), NULL },
                  { "allow-logout", 0, 0, G_OPTION_ARG_NONE, &allow_logout, N_("Allow logout"), NULL },
