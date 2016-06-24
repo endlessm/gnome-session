@@ -1,18 +1,205 @@
-gnome-session (3.10.1-1endless2) unstable; urgency=low
+gnome-session (3.20.1-4) unstable; urgency=medium
 
-  * debian/patches/endless-collabora-dont-check-for-gl.patch:
-    Rename this patch to make its origin clear.
-  * debian/gnome-session.install:
-    Don't install stock gnome session definitions, we have our own.
+  * debian/gnome-mimeapps.list: Replace iceweasel.desktop by
+    firefox-esr.desktop and firefox.desktop
+  * debian/gnome-mimeapps.list: Add default application for
+    application/x-cd-image, application/x-raw-disk-image and
+    application/x-raw-disk-image-xz-compressed
 
- -- Cosimo Cecchi <cosimo@endlessm.com>  Wed, 18 Dec 2013 11:25:52 -0800
+ -- Laurent Bigonville <bigon@debian.org>  Sat, 04 Jun 2016 23:06:54 +0200
 
-gnome-session (3.10.1-1endless1) unstable; urgency=low
+gnome-session (3.20.1-3) unstable; urgency=medium
 
-  * Rebase our changes on top of 3.10.1.
-    This includes the removal of defaults.list and gnomerc from this package.
+  * Add debian/patches/update-activation-environment-at-startup.patch: update
+    activation environment at startup, this way we are sure that all the
+    environment variables are also available for the user activated services
 
- -- Cosimo Cecchi <cosimo@endlessm.com>  Tue, 10 Dec 2013 14:43:36 -0800
+ -- Laurent Bigonville <bigon@debian.org>  Tue, 24 May 2016 13:21:04 +0200
+
+gnome-session (3.20.1-2) unstable; urgency=medium
+
+  * Drop /usr/share/gnome/applications/defaults.list symlink and install
+    /etc/gnome/defaults.list to /usr/share/applications/gnome-mimeapps.list
+    instead, as the xdg spec is allowing desktop specific default applications.
+    If /etc/gnome/defaults.list was modified by the system administrator, the
+    file is moved to /etc/xdg/gnome-mimeapps.list during the upgrade.
+    This seems to fix default apps when running gnome-shell as a wayland
+    compositor, as the 55gnome-session_gnomerc is not sourced in that case.
+
+ -- Laurent Bigonville <bigon@debian.org>  Tue, 17 May 2016 02:02:11 +0200
+
+gnome-session (3.20.1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Postpone the switch to Wayland by default. We don't want to entangle the
+    GNOME 3.20 transition with the Wayland switch.
+  * Upload to unstable.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 19 Apr 2016 23:50:01 +0200
+
+gnome-session (3.20.0-2) experimental; urgency=medium
+
+  * Add debian/patches/Revert-switch-to-Xorg-by-default.patch
+    - revert upstreams switch (back) to Xorg by default, as we need
+      wayland testing during our development cycle up to Stretch.
+      Upstream plans to ship GNOME 3.22 with wayland as default,
+      which is the GNOME release we're targeting for Stretch.
+   * debian/gnome-session.install:
+     - accept any *.desktop name for wayland-sessions.
+     - install all *.desktop files for xsessions.
+   * Add debian/patches/0001-main-fix-starting-gnome-session-via-startx.patch
+     - fixes starting "System Default" session
+
+ -- Andreas Henriksson <andreas@fatal.se>  Wed, 30 Mar 2016 19:16:31 +0200
+
+gnome-session (3.20.0-1) experimental; urgency=medium
+
+  * Bump gnome-shell dependency to >= 3.19
+    - gnome.session now uses new org.gnome.Shell desktop file name.
+  * New upstream release.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Fri, 25 Mar 2016 10:05:25 +0100
+
+gnome-session (3.19.92-1) experimental; urgency=medium
+
+  * New upstream release.
+  * Stop installing gnome-wayland.session
+    - no longer shipped, now merged with gnome.session
+  * Bump Standards-Version to 3.9.7.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Tue, 15 Mar 2016 21:05:23 +0100
+
+gnome-session (3.18.1.2-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Update Build-Depends as per configure.ac:
+    - Bump libglib2.0-dev to (>= 2.46.0). (Closes: #801736)
+    - Bump libgtk-3-dev to (>= 3.18.0).
+    - Bump libgnome-desktop-3-dev to (>= 3.18.0).
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 21 Oct 2015 16:23:10 +0200
+
+gnome-session (3.18.0-1) unstable; urgency=medium
+
+  * New upstream release (identical to 3.17.92).
+  * Upload to unstable.
+  * Drop obsolete Breaks, Conflicts and Replaces from pre-wheezy.
+  * Drop obsolete Provides: gnome3-session since there are no more reverse
+    dependencies.
+  * Update README.Debian, the package for the  metacity/gnome-panel based
+    fallback session is called "gnome-session-flashback".
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 11 Oct 2015 19:04:24 +0200
+
+gnome-session (3.17.92-1) experimental; urgency=medium
+
+  * New upstream release candidate.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Thu, 17 Sep 2015 16:30:30 +0200
+
+gnome-session (3.16.0-1) unstable; urgency=medium
+
+  * New upstream release.
+    - Adds new --disable-acceleration-check option (closes: #771513).
+  * Drop 0001-configure.ac-Add-support-for-new-versions-of-systemd.patch,
+    applied upstream.
+  * Upstream has disabled support for consolekit even on non-systemd
+    systems with this release. We follow upstream and do not enable it
+    forcefully. Please file a bug if you think this change is wrong.
+    - Drop libdbus-glib-1-dev build-dependency, it is now only used by
+      consolekit support code.
+    - Drop consolekit recommends from gnome-session-bin.
+  * Bump Standards-Version to 3.9.6, no changes needed.
+
+ -- Dmitry Shachnev <mitya57@debian.org>  Tue, 26 May 2015 17:34:09 +0300
+
+gnome-session (3.14.0-3) unstable; urgency=medium
+
+  * Cherry-pick upstream patch which allows to build against libsystemd and
+    update Build-Depends accordingly. (Closes: #779752)
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 28 Apr 2015 19:58:00 +0200
+
+gnome-session (3.14.0-2) unstable; urgency=medium
+
+  * Update debian/defaults.list to catch up with times:
+    - Drop swfdec-player which is long gone.
+    - Update File-Roller to new .desktop file name.
+    - Update GEdit to new .desktop file name.
+    - Update Font Viewer to new .desktop file name.
+    - Update Nautilus to new .desktop file name.
+    - Update Totem to new .desktop file name.
+    (Closes: #763595)
+  Note: This breaks the defaults for those who install the new
+        gnome-session-common and keep their << 3.14 application
+        packages (partial upgrades).
+
+ -- Andreas Henriksson <andreas@fatal.se>  Wed, 01 Oct 2014 16:11:51 +0200
+
+gnome-session (3.14.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Upload to unstable.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Mon, 22 Sep 2014 20:42:37 +0200
+
+gnome-session (3.13.3-1) experimental; urgency=medium
+
+  [ Andreas Henriksson ]
+  * New upstream development release.
+
+  [ Josselin Mouette ]
+  * Fix typos in defaults.list. Closes: #759429.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Fri, 05 Sep 2014 15:09:51 -0700
+
+gnome-session (3.12.1-4) experimental; urgency=medium
+
+  * gnome-session: Install wayland session files.
+  * gnome-session-bin: add xwayland dependency on linux-any.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Sat, 02 Aug 2014 17:22:46 +0200
+
+gnome-session (3.12.1-3) unstable; urgency=medium
+
+  [ Laurent Bigonville ]
+  * debian/control.in: Recommends libpam-systemd instead of systemd on linux
+    architectures and add recommends against consolekit on non linux arch.
+    Also move the Recommends to the arch any package.
+
+  [ Andreas Henriksson ]
+  * Drop build-dependency on libupower-glib-dev (<< 0.99.0) [!linux-any]
+    - This can no longer be fulfilled anyway.
+  * Upload to unstable.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Mon, 14 Jul 2014 23:57:59 +0200
+
+gnome-session (3.12.1-2) experimental; urgency=medium
+
+  * Enable systemd support on linux architectures only
+
+ -- Laurent Bigonville <bigon@debian.org>  Sun, 04 May 2014 15:02:14 +0200
+
+gnome-session (3.12.1-1) experimental; urgency=medium
+
+  * New upstream release
+
+ -- Sjoerd Simons <sjoerd@debian.org>  Sun, 27 Apr 2014 18:03:58 +0200
+
+gnome-session (3.12.0-1) experimental; urgency=medium
+
+  * New upstream release.
+  * Require upower build-dependency to be lower then 0.99.x and
+    only on non-linux.
+    - The new upower 0.99.x does not implement the used interfaces.
+    - Functionality is available via logind.
+  * Drop installing /usr/share/applications
+    - new upstream no longer ships gnome-session-properties
+  * Bump build-dependency on libglib2.0-dev to >= 2.39.90
+    - using g_subprocess requires a recent glib.
+  * Bump Standards-Version to 3.9.5
+
+ -- Andreas Henriksson <andreas@fatal.se>  Wed, 26 Mar 2014 22:51:00 +0100
 
 gnome-session (3.10.1-1) experimental; urgency=low
 
