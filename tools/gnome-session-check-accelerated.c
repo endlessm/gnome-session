@@ -217,14 +217,6 @@ main (int argc, char **argv)
 				rootwin,
 				is_accelerated_atom,
 				XA_CARDINAL, 32, PropModeReplace, (guchar *) &is_accelerated, 1);
-
-                XChangeProperty (GDK_DISPLAY_XDISPLAY (display),
-				rootwin,
-				renderer_atom,
-				XA_STRING, 8, PropModeReplace, (guchar *) renderer_string, strlen (renderer_string));
-
-                /* Print the renderer */
-                g_print ("%s", renderer_string);
 	}
 
 	if (is_software_rendering) {
@@ -233,6 +225,16 @@ main (int argc, char **argv)
 				is_software_rendering_atom,
 				XA_CARDINAL, 32, PropModeReplace, (guchar *) &is_software_rendering, 1);
 	}
+
+        if (is_accelerated || is_software_rendering) {
+                XChangeProperty (GDK_DISPLAY_XDISPLAY (display),
+				rootwin,
+				renderer_atom,
+				XA_STRING, 8, PropModeReplace, (guchar *) renderer_string, strlen (renderer_string));
+
+                /* Print the renderer */
+                g_print ("%s", renderer_string);
+        }
 
         gdk_display_sync (display);
 
