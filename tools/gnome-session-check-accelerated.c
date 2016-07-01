@@ -182,7 +182,7 @@ main (int argc, char **argv)
                            NULL, NULL, &renderer_string, NULL, &estatus, &gl_error)) {
                 is_accelerated = (WEXITSTATUS(estatus) == HELPER_ACCEL) || (WEXITSTATUS(estatus) == HELPER_SOFTWARE_RENDERING);
                 is_software_rendering = (WEXITSTATUS(estatus) == HELPER_SOFTWARE_RENDERING);
-                if (is_accelerated)
+                if (is_accelerated || is_software_rendering)
                         goto finish;
 
                 g_clear_pointer (&renderer_string, g_free);
