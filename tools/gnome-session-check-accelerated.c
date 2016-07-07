@@ -103,6 +103,7 @@ main (int argc, char **argv)
         glong is_accelerated, is_software_rendering;
         GError *gl_error = NULL, *gles_error = NULL;
 
+        g_print("gnome-session-check-accelerated started\n");
         /* gnome-session-check-accelerated gets run before X is started in the wayland
          * case, and it currently requires X. Until we have that working, just always
          * assume wayland will work
@@ -178,9 +179,11 @@ main (int argc, char **argv)
         gdk_display_sync (display);
 
         /* First, try the GLES helper */
+        g_printerr("about to run the GLES helper\n");
         if (g_spawn_sync (NULL, (char **) gles_helper_argv, NULL, 0,
                            NULL, NULL, &renderer_string, NULL, &estatus, &gles_error)) {
                 is_accelerated = (WEXITSTATUS(estatus) == HELPER_ACCEL);
+                g_printerr("the GLES helper returned accel %ld\n", is_accelerated);
                 if (is_accelerated)
                         goto finish;
 
@@ -189,10 +192,12 @@ main (int argc, char **argv)
         }
 
         /* Then, try the GL helper */
+        g_printerr("about to run the GL helper\n");
         if (g_spawn_sync (NULL, (char **) gl_helper_argv, NULL, 0,
                            NULL, NULL, &renderer_string, NULL, &estatus, &gl_error)) {
                 is_accelerated = (WEXITSTATUS(estatus) == HELPER_ACCEL) || (WEXITSTATUS(estatus) == HELPER_SOFTWARE_RENDERING);
                 is_software_rendering = (WEXITSTATUS(estatus) == HELPER_SOFTWARE_RENDERING);
+                g_printerr("the GL helper returned accel %ld llvmpipe %ld\n", is_accelerated, is_software_rendering);
                 if (is_accelerated || is_software_rendering)
                         goto finish;
 
@@ -233,7 +238,7 @@ main (int argc, char **argv)
 				XA_STRING, 8, PropModeReplace, (guchar *) renderer_string, strlen (renderer_string));
 
                 /* Print the renderer */
-                g_print ("%s", renderer_string);
+                g_printerr ("%s\n", renderer_string);
         }
 
         gdk_display_sync (display);
