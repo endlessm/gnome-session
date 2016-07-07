@@ -177,7 +177,18 @@ main (int argc, char **argv)
 
         gdk_display_sync (display);
 
-        /* First, try the GL helper */
+        /* First, try the GLES helper */
+        if (g_spawn_sync (NULL, (char **) gles_helper_argv, NULL, 0,
+                           NULL, NULL, &renderer_string, NULL, &estatus, &gles_error)) {
+                is_accelerated = (WEXITSTATUS(estatus) == HELPER_ACCEL);
+                if (is_accelerated)
+                        goto finish;
+
+                g_clear_pointer (&renderer_string, g_free);
+                g_printerr ("gnome-session-check-accelerated: GLES Helper exited with code %d\n", estatus);
+        }
+
+        /* Then, try the GL helper */
         if (g_spawn_sync (NULL, (char **) gl_helper_argv, NULL, 0,
                            NULL, NULL, &renderer_string, NULL, &estatus, &gl_error)) {
                 is_accelerated = (WEXITSTATUS(estatus) == HELPER_ACCEL) || (WEXITSTATUS(estatus) == HELPER_SOFTWARE_RENDERING);
@@ -187,17 +198,6 @@ main (int argc, char **argv)
 
                 g_clear_pointer (&renderer_string, g_free);
                 g_printerr ("gnome-session-check-accelerated: GL Helper exited with code %d\n", estatus);
-        }
-
-        /* Then, try the GLES helper */
-        if (g_spawn_sync (NULL, (char **) gles_helper_argv, NULL, 0,
-                           NULL, NULL, &renderer_string, NULL, &estatus, &gles_error)) {
-                is_accelerated = (WEXITSTATUS(estatus) == HELPER_ACCEL);
-                if (is_accelerated)
-                        goto finish;
-
-                g_clear_pointer (&renderer_string, g_free);
-                g_printerr ("gnome-session-check-accelerated: GLES Helper exited with code %d\n", estatus);
         }
 
         /* Both helpers failed; print their error messages */
