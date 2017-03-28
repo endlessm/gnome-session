@@ -37,7 +37,6 @@ Depends: ${misc:Depends},
          gnome-settings-daemon (>= 3.0),
          gnome-shell (>= 3.19) | eos-shell (>= 3.8),
          gnome-session-bin (>= ${binary:Version}),
-         gnome-session-bin (<< ${gnome:NextVersion}),
          gnome-session-common (= ${binary:Version})
 Suggests: gnome-user-guide,
           desktop-base,
