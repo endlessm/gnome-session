@@ -5,7 +5,7 @@
 export DEB_LDFLAGS_MAINT_APPEND = -Wl,-z,defs -Wl,-O1 -Wl,--as-needed
 
 %:
-	dh $@ --with gnome
+	dh $@
 
 ifeq (linux,$(DEB_HOST_ARCH_OS))
 CONFFLAGS = --enable-systemd
