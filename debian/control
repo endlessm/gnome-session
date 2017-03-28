@@ -41,7 +41,6 @@ Depends: ${misc:Depends},
          gnome-settings-daemon (>= 3.24),
          gnome-shell (>= 3.19),
          gnome-session-bin (>= ${binary:Version}),
-         gnome-session-bin (<< ${gnome:NextVersion}),
          gnome-session-common (= ${binary:Version})
 Suggests: gnome-user-guide,
           desktop-base,
