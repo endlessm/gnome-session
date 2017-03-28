@@ -42,3 +42,13 @@ Upon startup, gnome-session starts the following applications:
  - Required components: they are listed in the 
    /usr/share/gnome-session/sessions/*.desktop file corresponding to the 
    current session (gnome or gnome-fallback).
+
+MIME types associations
+-----------------------
+
+This package ships a list of default MIME types associations used when running
+the GNOME desktop.
+This file is installed in /usr/share/applications/gnome-mimeapps.list.
+The system administrator can override some associations by adding a file at
+/etc/xdg/gnome-mimeapps.list or /etc/xdg/mimeapps.list if he wants to apply to
+all the desktop environment.

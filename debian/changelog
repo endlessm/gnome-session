@@ -1,3 +1,91 @@
+gnome-session (3.22.3-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 09 Mar 2017 06:47:00 +0100
+
+gnome-session (3.22.2-2) unstable; urgency=medium
+
+  * Team upload
+
+  [ Jeremy Bicha ]
+  * Add git_wayland_login_shell.patch:
+    - Backport 3.23 commit that made Wayland sessions run login scripts
+      like ~/.profile since that's what people expect (LP: #1631713)
+
+ -- Simon McVittie <smcv@debian.org>  Fri, 20 Jan 2017 10:14:17 +0000
+
+gnome-session (3.22.2-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 08 Nov 2016 15:49:26 +0100
+
+gnome-session (3.22.1-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 12 Oct 2016 18:10:49 +0200
+
+gnome-session (3.22.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Drop debian/patches/git_fix-bashism.patch, merged upstream.
+  * Bump debhelper compat level to 10.
+  * Don't fail to restore the old desktop session files if we only build
+    architecture specific binary packages (gnome-session is arch:all).
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 20 Sep 2016 01:25:00 +0200
+
+gnome-session (3.21.90-4) unstable; urgency=medium
+
+  * Instead of patching the build system to get the old deskop session files
+    back, remove the new ones and ship a local copy of gnome-wayland.desktop
+    which was generated from the gnome-3-20 branch. This is much simpler and
+    we don't lose all the translations this way.
+  * Show uninstalled files via dh_install --list-missing.
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 08 Sep 2016 18:40:30 +0200
+
+gnome-session (3.21.90-3) unstable; urgency=medium
+
+  * Switch back to Xorg by default.
+    We divert from upstream here and switch the default GNOME session back to
+    Xorg for Stretch. This way, users who explicitly chose the GNOME session
+    in the display manager won't be automatically switched over to Wayland.
+    It's still possible to run Wayland via the "GNOME on Wayland" session.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 07 Sep 2016 23:07:21 +0200
+
+gnome-session (3.21.90-2) experimental; urgency=medium
+
+  * Add debian/patches/git_fix-bashism.patch (Closes: #835289)
+
+ -- Andreas Henriksson <andreas@fatal.se>  Sat, 03 Sep 2016 22:11:37 +0200
+
+gnome-session (3.21.90-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Update build-dependencies according to configure.ac changes:
+    - Add libgles2-mesa-dev
+  * debian/gnome-session-{bin,common}.install:
+    - stop installing *.ui and icons since gnome-session-properties tool
+      has now been removed.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Tue, 23 Aug 2016 12:19:33 +0200
+
+gnome-session (3.20.2-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Drop all translations, not used anymore.
+  * Drop debian/patches/update-activation-environment-at-startup.patch, merged
+    upstream.
+  * Bump debhelper compatibility level to 9.
+  * Convert from cdbs to dh.
+  * Bump Standards-Version to 3.9.8.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 13 Jul 2016 15:12:48 +0200
+
 gnome-session (3.20.1-4) unstable; urgency=medium
 
   * debian/gnome-mimeapps.list: Replace iceweasel.desktop by
