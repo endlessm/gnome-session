@@ -5,7 +5,7 @@
 export DEB_LDFLAGS_MAINT_APPEND = -Wl,-z,defs -Wl,-O1 -Wl,--as-needed
 
 %:
-	dh $@
+	dh $@ --with gnome
 
 ifeq (linux,$(DEB_HOST_ARCH_OS))
 CONFFLAGS = --enable-systemd
@@ -19,13 +19,6 @@ override_dh_auto_configure:
 		--libexecdir=/usr/lib/gnome-session \
 		--enable-ipv6 \
 		$(CONFFLAGS)
-
-override_dh_auto_install:
-	dh_auto_install
-	# Switch back to Xorg by default
-	rm debian/tmp/usr/share/wayland-sessions/gnome.desktop
-	rm debian/tmp/usr/share/xsessions/gnome-xorg.desktop
-	install -m 0644 debian/gnome-wayland.desktop debian/tmp/usr/share/wayland-sessions
 
 override_dh_install:
 	dh_install --list-missing

@@ -1,3 +1,26 @@
+gnome-session (3.24.1-2) unstable; urgency=medium
+
+  * Upload to unstable (Closes: #869947)
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Sun, 06 Aug 2017 17:37:05 -0400
+
+gnome-session (3.24.1-1) experimental; urgency=medium
+
+  * New upstream release.
+    - Drop debian/patches/git_wayland_login_shell.patch, applied upstream
+    - Bump gnome-settings-daemon dependency to 3.24
+    - debian/gnome-session.install: Also install gnome-dummy session file
+  * debian/control.in: Bump Standards-Version to 4.0.0 (no further changes)
+  * debian/rules: Switch default "gnome" session to wayland
+  * d/p/0001-manager-add-bus-daemon-dbus-api-xml-file.patch,
+    d/p/0002-system-add-api-for-detecting-if-this-is-the-last-ses.patch,
+    d/p/0003-manager-kill-off-bus-clients-at-log-out.patch: kill off bus
+    clients at log out, backported from upstream 3.25
+  * d/p/0004-fail-whale-handle-X-server-dying-before-startup.patch: handle X
+    server dying before startup, cherry-picked from 3.24 branch
+
+ -- Laurent Bigonville <bigon@debian.org>  Thu, 06 Jul 2017 00:25:20 +0200
+
 gnome-session (3.22.3-1) unstable; urgency=medium
 
   * New upstream release.
