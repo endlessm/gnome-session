@@ -21,6 +21,7 @@ Build-Depends: debhelper (>= 10),
                libxcomposite-dev,
                libgl1-mesa-dev,
                libgles2-mesa-dev,
+               libegl1-mesa-dev,
                libxtst-dev,
                libxrender-dev,
                xmlto,
@@ -36,7 +37,6 @@ Depends: ${misc:Depends},
          gnome-settings-daemon (>= 3.24),
          gnome-shell (>= 3.19),
          gnome-session-bin (>= ${binary:Version}),
-         gnome-session-bin (<< ${gnome:NextVersion}),
          gnome-session-common (= ${binary:Version})
 Suggests: desktop-base,
           gnome-keyring
@@ -57,8 +57,7 @@ Depends: ${shlibs:Depends},
          ${misc:Depends},
          dbus-x11,
          gsettings-desktop-schemas,
-         upower (>= 0.9.0),
-         xwayland [linux-any]
+         upower (>= 0.9.0)
 Recommends: libpam-systemd [linux-any]
 Breaks: gdm3 (<< 3.8)
 Description: GNOME Session Manager - Minimal runtime
