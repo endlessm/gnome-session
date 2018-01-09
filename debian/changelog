@@ -1,3 +1,33 @@
+gnome-session (3.26.1-2) unstable; urgency=medium
+
+  * Drop unnecessary Suggests: gnome-user-guide (LP: #1691867)
+  * Update Vcs fields for conversion to git
+  * Add debian/gbp.conf
+  * Bump Standards-Version to 4.1.2
+
+ -- Jeremy Bicha <jbicha@debian.org>  Fri, 15 Dec 2017 14:34:08 -0500
+
+gnome-session (3.26.1-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream release
+
+ -- Simon McVittie <smcv@debian.org>  Fri, 06 Oct 2017 10:52:04 +0100
+
+gnome-session (3.26.0-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Jeremy Bicha <jbicha@debian.org>  Thu, 14 Sep 2017 19:11:33 -0400
+
+gnome-session (3.25.90-1) unstable; urgency=medium
+
+  * New upstream release
+  * Bump Standards-Version to 4.1.0
+  * Drop all patches: Applied (or improved) in new release
+
+ -- Jeremy Bicha <jbicha@debian.org>  Wed, 06 Sep 2017 22:21:26 -0400
+
 gnome-session (3.24.1-2) unstable; urgency=medium
 
   * Upload to unstable (Closes: #869947)

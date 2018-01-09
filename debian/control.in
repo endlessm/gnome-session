@@ -3,7 +3,7 @@ Section: gnome
 Priority: optional
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
 Uploaders: @GNOME_TEAM@
-Standards-Version: 4.0.0
+Standards-Version: 4.1.2
 Build-Depends: debhelper (>= 10),
                gnome-pkg-tools (>= 0.13),
                gnome-common,
@@ -21,15 +21,14 @@ Build-Depends: debhelper (>= 10),
                libxcomposite-dev,
                libgl1-mesa-dev,
                libgles2-mesa-dev,
-               libegl1-mesa-dev,
                libxtst-dev,
                libxrender-dev,
                xmlto,
                xsltproc,
                xtrans-dev,
                libsystemd-dev (>= 209) [linux-any]
-Vcs-Svn: svn://anonscm.debian.org/pkg-gnome/desktop/unstable/gnome-session
-Vcs-Browser: https://anonscm.debian.org/viewvc/pkg-gnome/desktop/unstable/gnome-session
+Vcs-Git: https://anonscm.debian.org/git/pkg-gnome/gnome-session.git
+Vcs-Browser: https://anonscm.debian.org/git/pkg-gnome/gnome-session.git
 
 Package: gnome-session
 Architecture: all
@@ -39,8 +38,7 @@ Depends: ${misc:Depends},
          gnome-session-bin (>= ${binary:Version}),
          gnome-session-bin (<< ${gnome:NextVersion}),
          gnome-session-common (= ${binary:Version})
-Suggests: gnome-user-guide,
-          desktop-base,
+Suggests: desktop-base,
           gnome-keyring
 Provides: x-session-manager
 Description: GNOME Session Manager - GNOME 3 session
@@ -59,7 +57,8 @@ Depends: ${shlibs:Depends},
          ${misc:Depends},
          dbus-x11,
          gsettings-desktop-schemas,
-         upower (>= 0.9.0)
+         upower (>= 0.9.0),
+         xwayland [linux-any]
 Recommends: libpam-systemd [linux-any]
 Breaks: gdm3 (<< 3.8)
 Description: GNOME Session Manager - Minimal runtime
